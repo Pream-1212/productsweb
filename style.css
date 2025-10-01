@@ -1,0 +1,32 @@
+      .corner-wrapper{
+        position: absolute;   /* detach from normal flow */
+        top: 20px;           /* distance from top */
+        left: 20px;          /* distance from left */
+        display: grid;       /* use grid for 2x2 */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .corner-wrapper .card {
+        width: 18rem; /* fixed width like before */
+      }
+
+      h1 {
+        margin-bottom: 40px;
+      }
+
+      .main-wrapper {
+        display: flex;
+        gap: 40px; /* space between cards and form */
+        align-items: flex-start; /* align top edges */
+        flex-wrap: wrap; /* allow wrapping on smaller screens */
+      }
+
+      /* Form styling */
+      .form-wrapper {
+        min-width: 300px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
