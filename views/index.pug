@@ -1,0 +1,95 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title Products
+link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css", rel="stylesheet")
+link(rel="stylesheet", href="style.css")
+h1.text-center E-commerce Application
+.container
+  .row.g-4
+    //  Cards on the left 
+    .col-md-6
+      .row.g-3
+        .col-6
+          .card.bg-white
+            .card-body
+              h5.card-title Primary card title
+              p.card-text Some quick example text.
+        .col-6
+          .card.bg-white
+            .card-body
+              h5.card-title Secondary card title
+              p.card-text Some quick example text.
+        .col-6
+          .card.bg-white
+            .card-body
+              h5.card-title Success card title
+              p.card-text Some quick example text.
+        .col-6
+          .card.bg-white
+            .card-body
+              h5.card-title Danger card title
+              p.card-text Some quick example text.
+    //  Form on the right 
+    .col-md-6
+      .form-wrapper
+        h3 Add Product
+        form
+          .row.g-3
+            //  Product Name 
+            .col-12
+              select.form-control#productName(name="productName", required)
+                option(value, selected, disabled) Product Name
+                option(value="sumsangs25+ultra") Sumsang s25+ Ultra
+                option(value="guccixxlshirt") Gucci XXL Shirt
+                option(value="xlzarashirt") XL Zara Shirt
+                option(value="iphone15") iphone 15
+                option(value="smarthomecurtains") Smart home Curtains
+                option(value="spectrumzaptop14.6inc") Spectrum Laptop 14.6 Inc
+            //  Category 
+            .col-12
+              select.form-control#category(name="category", required)
+                option(value, selected, disabled) Category
+                option(value="smartphones") Smart Phones
+                option(value="fashion") Fashion
+                option(value="interiordesign") Interior Design
+                option(value="laptops") Laptops
+            //  Price 
+            .col-12
+              input.form-control#price(type="number", placeholder="Price" name="price")
+            //  Quantity 
+            .col-12
+              input.form-control#quantity(type="number", name="quantity", placeholder="Quantity", required)
+            //  Color 
+            .col-md-6
+              select.form-control#color(name="color", required)
+                option(value, selected, disabled) Color
+                option(value="pink") Pink
+                option(value="brown") Brown
+                option(value="grey") Grey
+                option(value="yellow") Yellow
+                option(value="white") White
+            //  Image Upload 
+            .col-md-6
+              input.form-control#productImage(type="text", name="productImage", placeholder="Upload Image")
+            //  Buttons 
+            .d-flex.gap-2
+              button.btn.text-white.flex-fill(type="submit", style="background-color: #ff7200").
+                
+                Save
+                
+              button.btn.btn-secondary.flex-fill(type="reset").
+                
+                Clear
+                
+  //  Table below 
+  .table-wrapper.mt-5
+    table.table.table-bordered.table-striped
+      thead.table-dark
+        tr
+          th ID
+          th NAME
+          th CATEGORY
+          th PRICE(UGX)
+          th QUANTITY
+      tbody
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js")
