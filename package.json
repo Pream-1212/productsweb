@@ -1,9 +1,10 @@
 {
   "name": "products",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,10 @@
   "homepage": "https://github.com/Pream-1212/productsweb#readme",
   "description": "",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "mongoose": "^8.18.3",
     "multer": "^2.0.2",
     "pug": "^3.0.3"

@@ -2,86 +2,88 @@ meta(charset="UTF-8")
 meta(name="viewport", content="width=device-width,initial-scale=1")
 title Products
 link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css", rel="stylesheet")
-link(rel="stylesheet", href="style.css")
-h1.text-center E-commerce Application
-.container
+link(rel="stylesheet", href="/css/style.css")
+
+.container-fluid
   .row.g-4
-    //  Cards on the left 
+    // Left Cards
     .col-md-6
       .row.g-3
-        .col-6
-          .card.bg-white
+        // Sales and Orders card
+        .col-12.mb-3
+          .card.bg-white.border-0.shadow-sm
             .card-body
-              h5.card-title Primary card title
-              p.card-text Some quick example text.
+              .row
+                .col-6.border-end
+                  h5.card-title.fw-bold UGX 50,000,000
+                  p.card-text.text-muted Sales
+                .col-6
+                  h5.card-title.fw-bold UGX 15,000,000
+                  p.card-text.text-muted Orders
+
+        // In Stock card
         .col-6
-          .card.bg-white
-            .card-body
-              h5.card-title Secondary card title
-              p.card-text Some quick example text.
+          .card.bg-white.border-0.shadow-sm
+            .card-body.text-center
+              h5.card-title.fw-bold #{inStockValue}
+              p.card-text.text-muted In stock
+
+        // Out of Stock card
         .col-6
-          .card.bg-white
-            .card-body
-              h5.card-title Success card title
-              p.card-text Some quick example text.
-        .col-6
-          .card.bg-white
-            .card-body
-              h5.card-title Danger card title
-              p.card-text Some quick example text.
-    //  Form on the right 
+          .card.bg-white.border-0.shadow-sm
+            .card-body.text-center
+              h5.card-title.fw-bold 5
+              p.card-text.text-muted Out of stock
+
+    // Right Form
     .col-md-6
-      .form-wrapper
-        h3 Add Product
-        form
+      .form-wrapper.bg-white.p-4.rounded.shadow-sm
+        h3.mb-4 Product
+
+        // Success Message
+        if message
+          .alert(role="alert" style="background-color: #28a745; color: white; display: flex; justify-content: space-between; align-items: center;")
+            strong= message
+            button.btn-close(type="button", data-bs-dismiss="alert", aria-label="Close" style="filter: invert(1);")
+
+        // Product Form
+        form(action='/' method='post' enctype="multipart/form-data" novalidate)
           .row.g-3
-            //  Product Name 
+            // Product Name
             .col-12
-              select.form-control#productName(name="productName", required)
-                option(value, selected, disabled) Product Name
-                option(value="sumsangs25+ultra") Sumsang s25+ Ultra
-                option(value="guccixxlshirt") Gucci XXL Shirt
-                option(value="xlzarashirt") XL Zara Shirt
-                option(value="iphone15") iphone 15
-                option(value="smarthomecurtains") Smart home Curtains
-                option(value="spectrumzaptop14.6inc") Spectrum Laptop 14.6 Inc
-            //  Category 
+              label.form-label.fw-bold Product Name
+              input.form-control#price(type="text" placeholder="Product Name" name="productName" value=(formData && formData.productName ? formData.productName : ''))
+
+            // Category
             .col-12
-              select.form-control#category(name="category", required)
-                option(value, selected, disabled) Category
-                option(value="smartphones") Smart Phones
-                option(value="fashion") Fashion
-                option(value="interiordesign") Interior Design
-                option(value="laptops") Laptops
-            //  Price 
+              label.form-label.fw-bold Category
+              input.form-control#price(type="text" placeholder="Category" name="category" value=(formData && formData.category ? formData.category : ''))
+
+            // Price
             .col-12
-              input.form-control#price(type="number", placeholder="Price" name="price")
-            //  Quantity 
+              label.form-label.fw-bold Price
+              input.form-control#price(type="number" placeholder="Price" name="price" value=(formData && formData.price ? formData.price : ''))
+
+            // Quantity
             .col-12
-              input.form-control#quantity(type="number", name="quantity", placeholder="Quantity", required)
-            //  Color 
+              label.form-label.fw-bold Quantity
+              input.form-control#quantity(type="number" name="quantity" placeholder="Quantity" required value=(formData && formData.quantity ? formData.quantity : ''))
+
+            // Color + Upload side by side
             .col-md-6
-              select.form-control#color(name="color", required)
-                option(value, selected, disabled) Color
-                option(value="pink") Pink
-                option(value="brown") Brown
-                option(value="grey") Grey
-                option(value="yellow") Yellow
-                option(value="white") White
-            //  Image Upload 
+              label.form-label.fw-bold Color
+              input.form-control#color(type="text" name="color" placeholder="Color" required value=(formData && formData.color ? formData.color : ''))
             .col-md-6
-              input.form-control#productImage(type="text", name="productImage", placeholder="Upload Image")
-            //  Buttons 
-            .d-flex.gap-2
-              button.btn.text-white.flex-fill(type="submit", style="background-color: #ff7200").
-                
-                Save
-                
-              button.btn.btn-secondary.flex-fill(type="reset").
-                
-                Clear
-                
-  //  Table below 
+              label.form-label.fw-bold Upload Image
+              input.form-control#productImage(type="file" name="productImage")
+
+            // Buttons
+            .col-12
+              .d-flex.gap-2
+                button.btn.text-white.flex-fill(type="submit" style="background-color: #ff7200") SAVE
+                button.btn.btn-secondary.flex-fill(type="reset") CLEAR
+
+  // Products Table
   .table-wrapper.mt-5
     table.table.table-bordered.table-striped
       thead.table-dark
@@ -92,4 +94,18 @@ h1.text-center E-commerce Application
           th PRICE(UGX)
           th QUANTITY
       tbody
+        if products && products.length
+          each product in products
+            tr
+              td #{product.productId}
+              td #{product.productName}
+              td #{product.category}
+              td #{product.price.toLocaleString()}
+              td #{product.quantity}
+        else
+          tr
+            td(colspan="5" class="text-center") No products found
+
+// Scripts
 script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js")
+script(src='/js/index.js')
