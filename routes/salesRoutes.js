@@ -83,11 +83,13 @@ router.post("/", upload.single("productImage"), async (req, res) => {
     }
 
     // --- Generate sequential product ID ---
-    const latest = await salesModel.findOne().sort({ createdAt: -1 });
+    const latest = await salesModel.findOne().sort({ _id: -1 });
     let newProductId = "#645341";
     if (latest && latest.productId) {
       const lastId = parseInt(latest.productId.replace("#", ""));
-      newProductId = "#" + (lastId + 1);
+      if (!isNaN(lastId)) {
+        newProductId = "#" + (lastId + 1);
+      }
     }
 
     // --- Create and save new product ---
